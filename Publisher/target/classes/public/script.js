@@ -9,11 +9,11 @@ document.getElementById("publishButton").addEventListener("click", function() {
     }
 
     const requestData = {
-        id: Math.floor(Math.random() * 100000), // Ensuring a valid integer ID
+        id: Math.floor(Math.random() * 100000), // Integer ID
         topic: topic,
         message: message,
         pid: publisherId,
-        mid: Math.floor(Math.random() * 10000), // Random message ID as integer
+        mid: Math.floor(Math.random() * 10000), // Random message ID
         timestamp: new Date().toISOString()
     };
 
@@ -34,9 +34,9 @@ document.getElementById("publishButton").addEventListener("click", function() {
 });
 
 function addMessageToTable(data) {
-    const table = document.getElementById("messagesTable");
-    const row = table.insertRow(-1);
-    row.insertCell(0).innerText = table.rows.length - 1;
+    const tableBody = document.querySelector("#messagesTable tbody");
+    const row = tableBody.insertRow();
+    row.insertCell(0).innerText = tableBody.rows.length;
     row.insertCell(1).innerText = data.topic;
     row.insertCell(2).innerText = data.message;
     row.insertCell(3).innerText = new Date().toLocaleTimeString();

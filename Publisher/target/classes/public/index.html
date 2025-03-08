@@ -8,37 +8,52 @@
 </head>
 <body>
 
-<h2>Publisher Form</h2>
+    <div class="container">
+        <h2>Publisher Form</h2>
 
-<label for="publisherId">Publisher ID:</label>
-<input type="text" id="publisherId" value="publisher-1" readonly>
+        <div class="form-group">
+            <label for="publisherId">Publisher ID:</label>
+            <input type="text" id="publisherId" value="publisher-1" readonly>
+        </div>
 
-<label for="topic">Topic:</label>
-<select id="topic">
-    <option disabled selected>Select Topic</option>
-    <option value="Football">Football</option>
-    <option value="Basketball">Basketball</option>
-    <option value="Cricket">Cricket</option>
-    <option value="Pool">Pool</option>
-    <option value="Others">Others</option>
-</select>
+        <div class="form-group">
+            <label for="topic">Topic:</label>
+            <select id="topic">
+                <option disabled selected>Select Topic</option>
+                <option value="Football">Football</option>
+                <option value="Basketball">Basketball</option>
+                <option value="Cricket">Cricket</option>
+                <option value="Pool">Pool</option>
+                <option value="Others">Others</option>
+            </select>
+        </div>
 
-<label for="message">Message:</label>
-<input type="text" id="message" placeholder="Enter your message">
+        <div class="form-group">
+            <label for="message">Message:</label>
+            <input type="text" id="message" placeholder="Enter your message">
+        </div>
 
-<button id="publishButton">Publish</button>
+        <button id="publishButton">Publish</button>
 
-<h3>Published Messages</h3>
-<table id="messagesTable">
-    <tr>
-        <th>#</th>
-        <th>Topic</th>
-        <th>Message</th>
-        <th>Time</th>
-    </tr>
-</table>
+        <h3>Published Messages</h3>
+        <div class="table-container">
+            <table id="messagesTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Topic</th>
+                        <th>Message</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Messages will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>

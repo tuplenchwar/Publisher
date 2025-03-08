@@ -26,7 +26,7 @@ public class PublisherService {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private static final AtomicInteger MESSAGE_ID_COUNTER = new AtomicInteger(1);
     private final String publisherId;
-    private final String coordinatorUrl = "http://localhost:8080";
+    private final String coordinatorUrl = "http://coordinator-sports-notification.click:8080/";
     private String leaderBrokerUrl;
     private Map<String, List<Packet>> topicMessages;
 
