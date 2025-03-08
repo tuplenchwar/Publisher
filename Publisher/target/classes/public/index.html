@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publisher Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h2>Publisher Form</h2>
+
+<label for="publisherId">Publisher ID:</label>
+<input type="text" id="publisherId" value="publisher-1" readonly>
+
+<label for="topic">Topic:</label>
+<select id="topic">
+    <option disabled selected>Select Topic</option>
+    <option value="Football">Football</option>
+    <option value="Basketball">Basketball</option>
+    <option value="Cricket">Cricket</option>
+    <option value="Pool">Pool</option>
+    <option value="Others">Others</option>
+</select>
+
+<label for="message">Message:</label>
+<input type="text" id="message" placeholder="Enter your message">
+
+<button id="publishButton">Publish</button>
+
+<h3>Published Messages</h3>
+<table id="messagesTable">
+    <tr>
+        <th>#</th>
+        <th>Topic</th>
+        <th>Message</th>
+        <th>Time</th>
+    </tr>
+</table>
+
+<script src="script.js"></script>
+
+</body>
+</html>
