@@ -1,24 +1,21 @@
-package org.example;
+package org.example.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dto.*;
 import org.springframework.http.*;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Service
 public class PublisherService {
 
     private final RestTemplate restTemplate = new RestTemplate();
@@ -32,12 +29,8 @@ public class PublisherService {
     public PublisherService() {
         this.publisherId = UUID.randomUUID().toString();
         System.out.println("Publisher started with ID: " + this.publisherId);
-    }
-
-    public void initialize() {
         fetchLeaderBroker();
         loadDummyData();
-        startPublishingProcess();
     }
 
     private void fetchLeaderBroker() {
@@ -64,31 +57,29 @@ public class PublisherService {
         }
     }
 
-    private void startPublishingProcess() {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.println("Select a topic to publish messages:");
-            topicMessages.keySet().forEach(System.out::println);
+    public List<String> getTopics() {
+        return new ArrayList<>(topicMessages.keySet());
+    }
 
-            String topic = scanner.nextLine();
-            if (!topicMessages.containsKey(topic)) {
-                System.out.println("Invalid topic! Try again.");
-                continue;
-            }
+    public String publishMessagesForTopic(String topic, int count) {
+        if (!topicMessages.containsKey(topic)) {
+            return "Invalid Topic!";
+        }
 
-            System.out.println("Enter number of messages to publish for " + topic + ":");
-            int count = Integer.parseInt(scanner.nextLine());
-            List<Packet> messages = topicMessages.get(topic);
+        List<Packet> messages = topicMessages.get(topic);
+        StringBuilder result = new StringBuilder();
 
-            for (int i = 0; i < Math.min(count, messages.size()); i++) {
-                publishMessage(messages.get(i));
-                try {
-                    TimeUnit.SECONDS.sleep(2);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
+        for (int i = 0; i < Math.min(count, messages.size()); i++) {
+            publishMessage(messages.get(i));
+            result.append("Published: ").append(messages.get(i).getMessage()).append("<br>");
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
             }
         }
+
+        return result.toString();
     }
 
     public void publishMessage(Packet packet) {
@@ -119,10 +110,5 @@ public class PublisherService {
             fetchLeaderBroker();
             publishMessage(packet);
         }
-    }
-
-    public static void main(String[] args) {
-        PublisherService publisherService = new PublisherService();
-        publisherService.initialize();
     }
 }

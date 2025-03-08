@@ -22,11 +22,24 @@
             <version>${spring-boot.version}</version>
         </dependency>
 
+        <!-- Thymeleaf -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>3.2.1</version> <!-- ADD VERSION -->
+        </dependency>
+
         <!-- Spring Boot Web Starter (For REST APIs) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring-boot.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version> <!-- Specify the correct version -->
         </dependency>
 
         <!-- Lombok (Reduces Boilerplate Code) -->
