@@ -7,6 +7,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,10 +36,11 @@ public class PublisherService {
         System.out.println("Publisher started with ID: " + this.publisherId);
     }
 
+    @PostConstruct
     public void initialize() {
         fetchLeaderBroker();
         loadDummyData();
-        startPublishingProcess();
+        //startPublishingProcess();
     }
 
     private void fetchLeaderBroker() {
@@ -58,7 +60,8 @@ public class PublisherService {
             if (inputStream == null) {
                 throw new RuntimeException("File not found in resources!");
             }
-            topicMessages = objectMapper.readValue(inputStream, new TypeReference<>() {});
+            topicMessages = objectMapper.readValue(inputStream, new TypeReference<>() {
+            });
             System.out.println("Loaded topics: " + topicMessages.keySet());
         } catch (IOException e) {
             throw new RuntimeException("Failed to load dummy message data.", e);
@@ -120,10 +123,5 @@ public class PublisherService {
             fetchLeaderBroker();
             publishMessage(packet);
         }
-    }
-
-    public static void main(String[] args) {
-        PublisherService publisherService = new PublisherService();
-        publisherService.initialize();
     }
 }

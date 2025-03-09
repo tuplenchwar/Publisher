@@ -16,8 +16,11 @@ document.getElementById("publishButton").addEventListener("click", function() {
         mid: Math.floor(Math.random() * 10000), // Random message ID
         timestamp: new Date().toISOString()
     };
+    const API_BASE_URL = `${window.location.protocol}//${window.location.hostname}:8080`;
 
-    fetch("http://localhost:8070/publisher/publish", {
+    console.log("API Base URL:", API_BASE_URL);
+
+    fetch(`${API_BASE_URL}/publisher/publish`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

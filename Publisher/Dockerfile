@@ -4,11 +4,13 @@ FROM openjdk:17-jdk-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the built JAR file (Ensure you have built the project first)
-COPY target/Publisher-0.0.1-SNAPSHOT.jar app.jar
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/
+
+# Copy the built JAR file into the container
+COPY  target/Publisher-1.0-SNAPSHOT.jar  /app/Publisher-1.0-SNAPSHOT.jar
 
 # Expose the application port
-EXPOSE 8070
+EXPOSE 8080
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "Publisher-1.0-SNAPSHOT.jar"]
