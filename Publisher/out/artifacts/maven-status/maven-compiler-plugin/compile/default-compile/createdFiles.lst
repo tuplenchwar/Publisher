@@ -1,0 +1,7 @@
+org\example\PublisherService$1.class
+dto\Packet.class
+org\example\PublisherService.class
+dto\Publisher.class
+org\example\PublisherApplication.class
+org\example\PublisherController.class
+dto\Broker.class
